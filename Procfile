@@ -1,0 +1,1 @@
+web: gunicorn dogcatandpj.wsgi --log-file -
