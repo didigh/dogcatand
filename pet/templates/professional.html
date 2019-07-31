@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<center>
+<h1>안녕하세요 전문가들에게 1:1 로 질문을 받을 수 있는 공간입니다</h1>
+<p>자유롭게 질문을 올려 주세요 :)</p>
+
+
+<button type="button" class="btn btn-outline-warning"><a href="{%url 'new'%}"; style="color:black">질문 올리기</a></button>
+<hr>
+<h5>작성된 글</h5>
+<hr>
+</center>
+<div class="list-group"; width="50%"; margin="auto" >
+    <form class = "container">
+        
+        {% for i in blog %}
+        <a href="{% url 'detail' i.id %}" class="list-group-item list-group-item-action">
+        <p> 제목 : {{i.title}} </p> </a>
+        <!-- <p> 본문 : {{i.body}} </p>    
+        <p> 날짜 : {{i.date}}</p>     -->
+        <br>
+        {% endfor %}
+    </form>
+</div>
+{% endblock %}
