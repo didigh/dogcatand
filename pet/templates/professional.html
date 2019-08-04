@@ -6,12 +6,12 @@
 <p>자유롭게 질문을 올려 주세요 :)</p>
 
 
-<button type="button" class="btn btn-outline-warning"><a href="{%url 'new'%}"; style="color:black">질문 올리기</a></button>
+<button type="button" class="btn btn-outline-warning"><a href="{% url 'new' %}" style="color:black">질문 올리기</a></button>
 <hr>
 <h5>작성된 글</h5>
 <hr>
 </center>
-<div class="list-group"; width="50%"; margin="auto" >
+<div class="list-group" width="50%" margin="auto" >
     <form class = "container">
         
         {% for i in blog %}

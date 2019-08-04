@@ -1,13 +1,46 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{{blog.title}}
-<hr>
-{{blog.body}}
-<hr>
-{{blog.date}}
-<hr>
-<a href="{% url 'edit' blog.id %}">수정하기</a><br>
-<a href="{% url 'delete' blog.id %}">삭제하기</a>
+<div class=container>
+<div class=posts>
+    {{blog.title}}
+    <hr>
+    {{blog.body}}
+    <hr>
+    {{blog.date}}
+    <hr>
+    <a href="{% url 'edit' blog.id %}">수정하기</a><br>
+    <a href="{% url 'delete' blog.id %}">삭제하기</a>
+</div>
+<div class =comments>
+    <span class= comment>댓글 쓰기:</span><br>
+       <form action="{% url 'comment_create' blog.id %}" method=POST>
+           {% csrf_token %}
+           <input type=text name=contents>
+           <button type="submit" class="btn">댓글쓰기</button>
+            </form>
 
+
+       <span class= comment>댓글:</span><br>
+     {% for comment in blog.comments.all %}
+         <li>
+             {{comment.contents}}
+             <a class="delete" href="{% url 'comment_delete' blog.id comment.id %}">삭제</a>
+             {% for re in comment.replies.all %}
+             <li>
+                 ㄴ{{re.contents}}   <a class="delete" href="{% url 'replay_delete' blog.id comment.id re.id %}">삭제</a>
+             </li>
+             {% endfor %}    
+         </li>
+
+         {% if comment %}
+         <span class= comment>대댓글 쓰기:</span><br>
+         <form action="{% url 'replay_create' blog.id comment.id %}" method=POST>
+             {% csrf_token %}
+             <input type=text name=contents>
+             <button type="submit" class="btn">대댓글쓰기</button>
+             </form>
+      {% endif %}
+      {% endfor %}
+   </div>
 {% endblock %}

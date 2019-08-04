@@ -32,5 +32,9 @@ urlpatterns = [
     path('new', pet.views.new, name= "new"),
     path('<int:blog_id>/edit', pet.views.edit, name = "edit"),
     path('<int:blog_id>/delete', pet.views.delete, name = "delete"),
+    path('<int:blog_id>/comment/comment_create', pet.views.comment_create,name="comment_create"),
+    path('<int:blog_id>/comment/<int:comment_id>/delete', pet.views.comment_delete, name="comment_delete"),
+    path('<int:blog_id>/comment/<int:comment_id>/replay_create',pet.views.replay_create,name="replay_create"),
+    path('<int:blog_id>/comment/<int:comment_id>/<int:re_id>/replay_delete', pet.views.replay_delete, name="replay_delete"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
